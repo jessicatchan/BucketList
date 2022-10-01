@@ -14,3 +14,13 @@ application. Specifically, this application may be most useful to young adults
 who may be newly beginning to budget and manage their money. This project is 
 interesting to me because as a young adult, I think it is important to start 
 learning how to budget in preparing for the future.
+
+## Task 3
+
+**User Stories:**
+- As a user, I want to be able to add an expense category to my expense category group
+- As a user, I want to be able to view the list of categories in my expense category group
+- As a user, I want to be able to add an amount of money spent to a category in my expense
+  category group
+- As a user, I want to be able to visualize statistics on the relative
+  proportion of monthly income is spent on a given expense category.
