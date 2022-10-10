@@ -1,26 +1,22 @@
-# My Personal Project
+# My Personal Project: Bucket List
 
 ## Task 2
 
-My application will be a system that records monthly spending habits. Users 
-will be able to enter the amount of money spent for each expense category. 
-Possible expense categories could include housing, food, transportation, 
-utilities, personal, and savings. The system will provide statistics with 
-the proportion of money spent on each category. Additionally, it will include 
-a bar chart visualizing the proportion of income spent on each category to make
-it easy for users to visualize where most of their income goes respective to 
-the given categories. Anyone who is making some sort of income may use this 
-application. Specifically, this application may be most useful to young adults
-who may be newly beginning to budget and manage their money. This project is 
-interesting to me because as a young adult, I think it is important to start 
-learning how to budget in preparing for the future.
+My application will be a system that stores a person's bucket list. Users will be able
+to enter activities and goals that they want to accomplish. The system will keep track 
+of the activities/goals that the user enters in chronological order. Users will be able to
+mark tasks as complete and favourite tasks that they are keen on doing. This application 
+is for anyone who wants to keep track of accomplishments and activities that they want to complete.
+I often have a list of ideas and activities that I want to do, however I never write them down and
+often forget. For instance, there are many places that I want to travel to and food places to try. 
+Thus, this project is interesting to me because I think it will allow for myself and others to 
+keep track of fun activities for the future!
+
 
 ## Task 3
 
 **User Stories:**
-- As a user, I want to be able to add an expense category to my expense category group
-- As a user, I want to be able to view the list of categories in my expense category group
-- As a user, I want to be able to add an amount of money spent to a category in my expense
-  category group
-- As a user, I want to be able to visualize statistics on the relative
-  proportion of monthly income is spent on a given expense category.
+- As a user, I want to be able to add an activity or goal to my bucket list.
+- As a user, I want to be able to view the activities and goals on my bucket list.
+- As a user, I want to be able to mark an activity/goal as complete on my bucket list.
+- As a user, I want to be able to delete an activity/goal from my bucket list.
