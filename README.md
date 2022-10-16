@@ -16,7 +16,7 @@ keep track of fun activities for the future!
 ## Task 3
 
 **User Stories:**
-- As a user, I want to be able to add an activity that is not yet attained to my bucket list.
+- As a user, I want to be able to add an activity to my bucket list.
 - As a user, I want to be able to view the activities on my bucket list that are not attained.
 - As a user, I want to be able to mark an activity as attained on my bucket list.
 - As a user, I want to be able to delete an activity from my bucket list.

@@ -104,7 +104,7 @@ public class BucketListTest {
         testBucketList.addActivity(a2);
 
         List<String> activitiesToDo = testBucketList.unattainedActivities();
-        assertEquals(1, activitiesToDo.size());
+        assertEquals(1, testBucketList.unattainedActivities().size());
         assertTrue(activitiesToDo.contains("Go skydiving"));
     }
 
