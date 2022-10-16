@@ -92,8 +92,7 @@ public class BucketListApp {
         System.out.println("Enter activity to be removed from bucket list");
         String description = input.next();
 
-        Activity activity = new Activity(description);
-        bucketList.removeActivity(activity);
+        bucketList.removeActivity(description);
 
         System.out.println("Activity is not in bucket list anymore");
     }

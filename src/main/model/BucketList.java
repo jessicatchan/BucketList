@@ -23,9 +23,11 @@ public class BucketList {
 
     // MODIFIES: this
     // EFFECTS: if experience is in the bucket list, remove it. Otherwise, do nothing
-    public void removeActivity(Activity activity) {
-        if (bucketList.contains(activity)) {
-            bucketList.remove(activity);
+    public void removeActivity(String activity) {
+        for (Activity a: bucketList) {
+            if (a.getDescription() == activity) {
+                bucketList.remove(a);
+            }
         }
     }
 

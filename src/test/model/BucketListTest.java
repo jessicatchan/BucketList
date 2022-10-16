@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BucketListTest {
     private BucketList testBucketList;
+    private BucketList testBucketList2;
     private Activity a1;
     private Activity a2;
     private Activity a3;
@@ -66,11 +67,13 @@ public class BucketListTest {
     @Test
     public void testRemoveActivity() {
         testBucketList.addActivity(a1);
-        testBucketList.removeActivity(a1);
+        testBucketList.addActivity(a2);
+
+        testBucketList.removeActivity("Go surfing in Hawaii");
 
         List<Activity> listOfActivities = testBucketList.allActivities();
 
-        assertEquals(0, listOfActivities.size());
+        assertEquals(1, listOfActivities.size());
     }
 
     @Test
@@ -79,8 +82,8 @@ public class BucketListTest {
         testBucketList.addActivity(a2);
         testBucketList.addActivity(a3);
 
-        testBucketList.removeActivity(a2);
-        testBucketList.removeActivity(a1);
+        testBucketList.removeActivity("Go skydiving");
+        testBucketList.removeActivity("Go surfing in Hawaii");
 
         List<Activity> listOfActivities = testBucketList.allActivities();
 
@@ -90,7 +93,7 @@ public class BucketListTest {
 
     @Test
     public void testRemoveActivityNotThere() {
-        testBucketList.removeActivity(a1);
+        testBucketList.removeActivity("Go surfing in Hawaii");
         List<Activity> listOfActivities = testBucketList.allActivities();
 
         assertEquals(0, listOfActivities.size());
