@@ -3,7 +3,6 @@ package ui;
 import model.Activity;
 import model.BucketList;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class BucketListApp {
@@ -58,7 +57,6 @@ public class BucketListApp {
     // EFFECTS: initializes bucket list
     private void init() {
         bucketList = new BucketList();
-        //TODO is scanner and use delimiter necessary?
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -74,13 +72,15 @@ public class BucketListApp {
 
     // TODO: implementation
     // MODIFIES: this
-    // EFFECTS: adds an activity to the bucket list
+    // EFFECTS: adds an activity to the bucket list if not already in bucket list
     private void addActivity() {
         System.out.println("Enter activity description");
         String description = input.next();
 
         Activity activity = new Activity(description);
+
         bucketList.addActivity(activity);
+
 
         System.out.println("Activity is added to bucket list!");
     }
@@ -94,7 +94,7 @@ public class BucketListApp {
 
         bucketList.removeActivity(description);
 
-        System.out.println("Activity is not in bucket list anymore");
+        System.out.println("Activity is not in bucket list");
     }
 
     // TODO: implementation
@@ -102,9 +102,9 @@ public class BucketListApp {
     // EFFECTS: marks input activity description as attained
     public void markActivityAsAttained() {
         System.out.println("Enter activity that has been attained");
-        String descr = input.next();
+        String description = input.next();
 
-        Activity activity = new Activity(descr);
+        Activity activity = new Activity(description);
         activity.markAttained();
 
         System.out.println("Activity as been marked as attained");

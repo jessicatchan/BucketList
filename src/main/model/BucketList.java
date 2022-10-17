@@ -1,12 +1,11 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a bucket list
 public class BucketList {
-    private ArrayList<Activity> bucketList;
+    private List<Activity> bucketList;
 
     // EFFECTS: constructs an empty BucketList
     public BucketList() {
@@ -43,7 +42,7 @@ public class BucketList {
     }
 
     // EFFECTS: returns all activities in the bucket list
-    public ArrayList<Activity> allActivities() {
+    public List<Activity> allActivities() {
         return bucketList;
     }
 
