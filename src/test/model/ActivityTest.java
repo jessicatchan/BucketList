@@ -10,18 +10,18 @@ class ActivityTest {
 
     @BeforeEach
     public void runBefore() {
-        testActivity = new Activity("Go Surfing in Hawaii!");
+        testActivity = new Activity("Go Surfing in Hawaii");
     }
 
     @Test
     public void testConstructor() {
-        assertEquals("Go Surfing in Hawaii!", testActivity.getDescription());
-        assertFalse(testActivity.getIsAttained());
+        assertEquals("Go Surfing in Hawaii", testActivity.getDescription());
+        assertFalse(testActivity.getCompleted());
     }
 
     @Test
-    public void testMarkAsAttained() {
-        testActivity.markAttained();
-        assertTrue(testActivity.getIsAttained());
+    public void testMarkCompleted() {
+        testActivity.markCompleted();
+        assertTrue(testActivity.getCompleted());
     }
 }

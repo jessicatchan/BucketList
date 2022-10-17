@@ -23,7 +23,7 @@ public class BucketListTest {
 
     @Test
     public void testConstructor() {
-        List<Activity> listOfActivities = testBucketList.allActivities();
+        List<Activity> listOfActivities = testBucketList.getBucketList();
         assertEquals(0, listOfActivities.size());
     }
 
@@ -31,11 +31,9 @@ public class BucketListTest {
     public void testAddActivity() {
         testBucketList.addActivity(a1);
 
-        List<Activity> listOfActivities = testBucketList.allActivities();
-
-        assertEquals(1, listOfActivities.size());
-        assertTrue(listOfActivities.contains(a1));
-        assertEquals(a1, listOfActivities.get(0));
+        assertEquals(1, testBucketList.getBucketList().size());
+        assertTrue(testBucketList.getBucketList().contains(a1));
+        assertEquals(a1, testBucketList.getBucketList().get(0));
     }
 
     @Test
@@ -43,11 +41,9 @@ public class BucketListTest {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
 
-        List<Activity> listOfActivities = testBucketList.allActivities();
-
-        assertEquals(2, listOfActivities.size());
-        assertEquals(a1, listOfActivities.get(0));
-        assertEquals(a2, listOfActivities.get(1));
+        assertEquals(2, testBucketList.getBucketList().size());
+        assertEquals(a1, testBucketList.getBucketList().get(0));
+        assertEquals(a2, testBucketList.getBucketList().get(1));
     }
 
     @Test
@@ -55,45 +51,37 @@ public class BucketListTest {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a1);
 
-        List<Activity> listOfActivities = testBucketList.allActivities();
-
-        assertEquals(1, listOfActivities.size());
-        assertTrue(listOfActivities.contains(a1));
+        assertEquals(1, testBucketList.getBucketList().size());
+        assertTrue(testBucketList.getBucketList().contains(a1));
     }
 
     @Test
     public void testRemoveActivity() {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
-
         testBucketList.removeActivity("Go surfing in Hawaii");
 
-        List<Activity> listOfActivities = testBucketList.allActivities();
-
-        assertEquals(1, listOfActivities.size());
+        assertEquals(1, testBucketList.getBucketList().size());
     }
 
     @Test
     public void testRemoveActivityMultipleTimes() {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
-        testBucketList.removeActivity("Go surfing in Hawaii");
+        testBucketList.removeActivity(a1.getDescription());
         testBucketList.addActivity(a3);
-        testBucketList.removeActivity("Go skydiving");
+        testBucketList.removeActivity(a2.getDescription());
 
-        List<Activity> listOfActivities = testBucketList.allActivities();
-
-        assertEquals(1, listOfActivities.size());
-        assertTrue(listOfActivities.contains(a3));
+        assertEquals(1, testBucketList.getBucketList().size());
+        assertTrue(testBucketList.getBucketList().contains(a3));
     }
 
     @Test
     public void testRemoveActivityNotThere() {
-        testBucketList.removeActivity("Go surfing in Hawaii");
-        List<Activity> listOfActivities = testBucketList.allActivities();
+        testBucketList.removeActivity(a1.getDescription());
 
-        assertEquals(0, listOfActivities.size());
-        assertFalse(listOfActivities.contains(a1));
+        assertEquals(0, testBucketList.getBucketList().size());
+        assertFalse(testBucketList.getBucketList().contains(a1));
     }
 
     @Test
@@ -101,11 +89,9 @@ public class BucketListTest {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
 
-        List<String> listofActivities = testBucketList.allActivityDescr();
-
-        assertEquals(2, listofActivities.size());
-        assertEquals("Go surfing in Hawaii", listofActivities.get(0));
-        assertEquals("Go skydiving", listofActivities.get(1));
+        assertEquals(2, testBucketList.allActivityDescr().size());
+        assertEquals("Go surfing in Hawaii", testBucketList.allActivityDescr().get(0));
+        assertEquals("Go skydiving", testBucketList.allActivityDescr().get(1));
     }
 
     @Test
@@ -113,10 +99,10 @@ public class BucketListTest {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
         testBucketList.addActivity(a3);
-        testBucketList.markItemAsAttained("Run a marathon");
+        testBucketList.markActivityComplete("Run a marathon");
 
-        assertTrue(a3.getIsAttained());
-        assertFalse(a1.getIsAttained());
-        assertFalse(a2.getIsAttained());
+        assertTrue(a3.getCompleted());
+        assertFalse(a1.getCompleted());
+        assertFalse(a2.getCompleted());
     }
 }

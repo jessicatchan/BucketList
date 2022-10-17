@@ -1,21 +1,21 @@
 package model;
 
-// Represents an activity with a description and whether it has been attained.
+// Represents an activity with a description and whether it has been completed
 public class Activity {
-    private String description;
-    private boolean attained;
+    private final String description;
+    private boolean completed;
 
     // REQUIRES: activity is not an empty string
-    // EFFECTS: constructs an activity with a description, activity is not attained
+    // EFFECTS: constructs an activity with a description, activity is not completed
     public Activity(String description) {
         this.description = description;
-        this.attained = false;
+        this.completed = false;
     }
 
     // MODIFIES: this
-    // EFFECTS: marks the activity as attained, regardless if it has been attained already
-    public void markAttained() {
-        this.attained = true;
+    // EFFECTS: marks the activity as completed
+    public void markCompleted() {
+        this.completed = true;
     }
 
     // EFFECTS: returns description of activity
@@ -24,7 +24,7 @@ public class Activity {
     }
 
     // EFFECTS: returns boolean, true if experience is complete, false otherwise
-    public boolean getIsAttained() {
-        return attained;
+    public boolean getCompleted() {
+        return completed;
     }
 }

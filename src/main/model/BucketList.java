@@ -3,9 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a bucket list to store a users bucket list activities.
+// Represents a bucket list to store a users list of activities (bucket list).
 public class BucketList {
-    private List<Activity> bucketList;
+    private final List<Activity> bucketList;
 
     // EFFECTS: constructs an empty BucketList
     public BucketList() {
@@ -30,11 +30,6 @@ public class BucketList {
         }
     }
 
-    // EFFECTS: returns a list of all the Activities in the bucket list
-    public List<Activity> allActivities() {
-        return bucketList;
-    }
-
     // EFFECTS: returns a list of every activity description in the bucket list
     public List<String> allActivityDescr() {
         List<String> listOfDescr = new ArrayList<>();
@@ -44,12 +39,18 @@ public class BucketList {
         return listOfDescr;
     }
 
-    // EFFECTS: marks the Activity in the bucket list which has the same desc as attained
-    public void markItemAsAttained(String descr) {
+    // EFFECTS: if an activity in the bucket list has the same description as descr, marks it as complete.
+    // Otherwise do nothing.
+    public void markActivityComplete(String descr) {
         for (Activity a: bucketList) {
             if (a.getDescription().equals(descr)) {
-                a.markAttained();
+                a.markCompleted();
             }
         }
+    }
+
+    // EFFECTS: returns all the Activities in the bucket list
+    public List<Activity> getBucketList() {
+        return bucketList;
     }
 }
