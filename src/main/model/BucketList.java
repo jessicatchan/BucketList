@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a bucket list
+// Represents a bucket list to store a users bucket list activities.
 public class BucketList {
     private List<Activity> bucketList;
 
@@ -30,22 +30,23 @@ public class BucketList {
         }
     }
 
-    // EFFECTS: returns a list of the activities in bucketList that have not been attained yet
-    public ArrayList<String> unattainedActivities() {
-        ArrayList<String> allActivitiesUnattained = new ArrayList<>();
-        for (Activity a: this.bucketList) {
-            if (!a.getIsAttained()) {
-                allActivitiesUnattained.add(a.getDescription());
-            }
-        }
-        return allActivitiesUnattained;
-    }
+//    // EFFECTS: returns a list of the activities in bucketList that have not been attained yet
+//    public ArrayList<String> unattainedActivities() {
+//        ArrayList<String> allActivitiesUnattained = new ArrayList<>();
+//        for (Activity a: this.bucketList) {
+//            if (!a.getIsAttained()) {
+//                allActivitiesUnattained.add(a.getDescription());
+//            }
+//        }
+//        return allActivitiesUnattained;
+//    }
 
-    // EFFECTS: returns all activities in the bucket list
+    // EFFECTS: returns a list of all the Activities in the bucket list
     public List<Activity> allActivities() {
         return bucketList;
     }
 
+    // EFFECTS: returns a list of every activity description in the bucket list
     public List<String> allActivityDescr() {
         List<String> listOfDescr = new ArrayList<>();
         for (Activity a: bucketList) {
@@ -54,6 +55,7 @@ public class BucketList {
         return listOfDescr;
     }
 
+    // EFFECTS: marks the Activity in the bucket list which has the same desc as attained
     public void markItemAsAttained(String descr) {
         for (Activity a: bucketList) {
             if (a.getDescription() == descr) {

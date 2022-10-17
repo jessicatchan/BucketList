@@ -1,6 +1,6 @@
 package model;
 
-// Represents an activity with a description and whether it is attained.
+// Represents an activity with a description and whether it has been attained.
 public class Activity {
     private String description;
     private boolean attained;
@@ -13,12 +13,12 @@ public class Activity {
     }
 
     // MODIFIES: this
-    // EFFECTS: marks the experience as attained
+    // EFFECTS: marks the activity as attained, regardless if it has been attained already
     public void markAttained() {
         this.attained = true;
     }
 
-    // EFFECTS: returns descriptive activity name
+    // EFFECTS: returns description of activity
     public String getDescription() {
         return description;
     }
@@ -27,5 +27,4 @@ public class Activity {
     public boolean getIsAttained() {
         return attained;
     }
-
 }

@@ -3,18 +3,15 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BucketListTest {
     private BucketList testBucketList;
-    private BucketList testBucketList2;
     private Activity a1;
     private Activity a2;
     private Activity a3;
-
 
     @BeforeEach
     public void runBefore() {
@@ -100,40 +97,40 @@ public class BucketListTest {
         assertFalse(listOfActivities.contains(a1));
     }
 
-    @Test
-    public void testUnattainedActivities() {
-        a1.markAttained();
-        testBucketList.addActivity(a1);
-        testBucketList.addActivity(a2);
-
-        List<String> activitiesToDo = testBucketList.unattainedActivities();
-        assertEquals(1, testBucketList.unattainedActivities().size());
-        assertTrue(activitiesToDo.contains("Go skydiving"));
-    }
-
-    @Test
-    public void testUnattainedActivitiesAllAttained() {
-        a1.markAttained();
-        testBucketList.addActivity(a1);
-        List<String> activitiesToDo = testBucketList.unattainedActivities();
-
-        assertEquals(0, activitiesToDo.size());
-        assertFalse(activitiesToDo.contains("Go surfing in Hawaii"));
-    }
-
-    @Test
-    public void testUnattainedActivitiesNoneAttained() {
-        testBucketList.addActivity(a1);
-        testBucketList.addActivity(a2);
-        testBucketList.addActivity(a3);
-
-        List<String> listOfActivities = testBucketList.unattainedActivities();
-
-        assertEquals(3, listOfActivities.size());
-        assertEquals("Go surfing in Hawaii", listOfActivities.get(0));
-        assertEquals("Go skydiving", listOfActivities.get(1));
-        assertEquals("Run a marathon", listOfActivities.get(2));
-    }
+//    @Test
+//    public void testUnattainedActivities() {
+//        a1.markAttained();
+//        testBucketList.addActivity(a1);
+//        testBucketList.addActivity(a2);
+//
+//        List<String> activitiesToDo = testBucketList.unattainedActivities();
+//        assertEquals(1, testBucketList.unattainedActivities().size());
+//        assertTrue(activitiesToDo.contains("Go skydiving"));
+//    }
+//
+//    @Test
+//    public void testUnattainedActivitiesAllAttained() {
+//        a1.markAttained();
+//        testBucketList.addActivity(a1);
+//        List<String> activitiesToDo = testBucketList.unattainedActivities();
+//
+//        assertEquals(0, activitiesToDo.size());
+//        assertFalse(activitiesToDo.contains("Go surfing in Hawaii"));
+//    }
+//
+//    @Test
+//    public void testUnattainedActivitiesNoneAttained() {
+//        testBucketList.addActivity(a1);
+//        testBucketList.addActivity(a2);
+//        testBucketList.addActivity(a3);
+//
+//        List<String> listOfActivities = testBucketList.unattainedActivities();
+//
+//        assertEquals(3, listOfActivities.size());
+//        assertEquals("Go surfing in Hawaii", listOfActivities.get(0));
+//        assertEquals("Go skydiving", listOfActivities.get(1));
+//        assertEquals("Run a marathon", listOfActivities.get(2));
+//    }
 
     @Test
     public void testAllActivityDescr() {
