@@ -24,6 +24,4 @@ class ActivityTest {
         testActivity.markAttained();
         assertTrue(testActivity.getIsAttained());
     }
-
-
 }

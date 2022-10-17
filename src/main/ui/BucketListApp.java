@@ -47,6 +47,8 @@ public class BucketListApp {
         } else if (command.equals("c")) {
             markActivityAsAttained();
         } else if (command.equals("v")) {
+            viewUnattainedActivities();
+        } else if (command.equals("all")) {
             viewAllActivities();
         } else {
             System.out.println("Selection not valid...");
@@ -67,7 +69,8 @@ public class BucketListApp {
         System.out.println("\ta -> add activity");
         System.out.println("\tr -> remove activity");
         System.out.println("\tc -> check-off activity");
-        System.out.println("\tv -> view bucket list");
+        System.out.println("\tv -> view unattained activities");
+        System.out.println("\tall -> view complete bucket list");
         System.out.println("\tq -> quit");
     }
 
@@ -75,14 +78,14 @@ public class BucketListApp {
     // EFFECTS: adds an activity to the bucket list if not already in bucket list
     private void addActivity() {
         System.out.println("Enter activity description");
-        String description = input.next();
+        String descr = input.next();
 
-        if (!bucketList.allActivityDescr().contains(description)) {
-            Activity activity = new Activity(description);
+        if (!bucketList.allActivityDescr().contains(descr)) {
+            Activity activity = new Activity(descr);
             bucketList.addActivity(activity);
             System.out.println("Activity has been added to bucket list!");
         } else {
-            System.out.println("Activity is already in bucket list!");
+            System.out.println("Activity is already in bucket list");
         }
     }
 
@@ -90,10 +93,10 @@ public class BucketListApp {
     // EFFECTS: removes activity from the bucket list
     private void removeThisActivity() {
         System.out.println("Enter activity to be removed from bucket list");
-        String description = input.next();
+        String descr = input.next();
 
-        if (bucketList.allActivityDescr().contains(description)) {
-            bucketList.removeActivity(description);
+        if (bucketList.allActivityDescr().contains(descr)) {
+            bucketList.removeActivity(descr);
             System.out.println("Activity removed from bucket list");
         } else {
             System.out.println("Activity does not exist in bucket list");
@@ -104,13 +107,24 @@ public class BucketListApp {
     // EFFECTS: marks input activity description as attained
     public void markActivityAsAttained() {
         System.out.println("Enter activity that has been attained");
-        String description = input.next();
+        String descr = input.next();
 
-        if (bucketList.allActivityDescr().contains(description)) {
-            bucketList.markItemAsAttained(description);
+        if (bucketList.allActivityDescr().contains(descr)) {
+            bucketList.markItemAsAttained(descr);
             System.out.println("Activity has been marked as attained");
         } else {
             System.out.println("Activity not found");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: prints a list of activity descriptions that are unattained
+    public void viewUnattainedActivities() {
+        System.out.println("Unattained Activities:");
+        for (Activity a: bucketList.allActivities()) {
+            if (!a.getIsAttained()) {
+                System.out.println(a.getDescription());
+            }
         }
     }
 

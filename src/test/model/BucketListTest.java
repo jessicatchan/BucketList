@@ -77,10 +77,9 @@ public class BucketListTest {
     public void testRemoveActivityMultipleTimes() {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
-        testBucketList.addActivity(a3);
-
-        testBucketList.removeActivity("Go skydiving");
         testBucketList.removeActivity("Go surfing in Hawaii");
+        testBucketList.addActivity(a3);
+        testBucketList.removeActivity("Go skydiving");
 
         List<Activity> listOfActivities = testBucketList.allActivities();
 
@@ -96,41 +95,6 @@ public class BucketListTest {
         assertEquals(0, listOfActivities.size());
         assertFalse(listOfActivities.contains(a1));
     }
-
-//    @Test
-//    public void testUnattainedActivities() {
-//        a1.markAttained();
-//        testBucketList.addActivity(a1);
-//        testBucketList.addActivity(a2);
-//
-//        List<String> activitiesToDo = testBucketList.unattainedActivities();
-//        assertEquals(1, testBucketList.unattainedActivities().size());
-//        assertTrue(activitiesToDo.contains("Go skydiving"));
-//    }
-//
-//    @Test
-//    public void testUnattainedActivitiesAllAttained() {
-//        a1.markAttained();
-//        testBucketList.addActivity(a1);
-//        List<String> activitiesToDo = testBucketList.unattainedActivities();
-//
-//        assertEquals(0, activitiesToDo.size());
-//        assertFalse(activitiesToDo.contains("Go surfing in Hawaii"));
-//    }
-//
-//    @Test
-//    public void testUnattainedActivitiesNoneAttained() {
-//        testBucketList.addActivity(a1);
-//        testBucketList.addActivity(a2);
-//        testBucketList.addActivity(a3);
-//
-//        List<String> listOfActivities = testBucketList.unattainedActivities();
-//
-//        assertEquals(3, listOfActivities.size());
-//        assertEquals("Go surfing in Hawaii", listOfActivities.get(0));
-//        assertEquals("Go skydiving", listOfActivities.get(1));
-//        assertEquals("Run a marathon", listOfActivities.get(2));
-//    }
 
     @Test
     public void testAllActivityDescr() {
