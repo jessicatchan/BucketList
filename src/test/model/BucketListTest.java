@@ -23,8 +23,7 @@ public class BucketListTest {
 
     @Test
     public void testConstructor() {
-        List<Activity> listOfActivities = testBucketList.getBucketList();
-        assertEquals(0, listOfActivities.size());
+        assertEquals(0, testBucketList.getBucketList().size());
     }
 
     @Test
@@ -62,6 +61,8 @@ public class BucketListTest {
         testBucketList.removeActivity("Go surfing in Hawaii");
 
         assertEquals(1, testBucketList.getBucketList().size());
+        assertTrue(testBucketList.getBucketList().contains(a2));
+        assertFalse(testBucketList.getBucketList().contains(a1));
     }
 
     @Test
@@ -89,14 +90,14 @@ public class BucketListTest {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
 
-        assertEquals(2, testBucketList.allActivityDescr().size());
-        assertEquals("Go surfing in Hawaii", testBucketList.allActivityDescr().get(0));
-        assertEquals("Go skydiving", testBucketList.allActivityDescr().get(1));
+        assertEquals(2, testBucketList.allDescriptions().size());
+        assertEquals("Go surfing in Hawaii", testBucketList.allDescriptions().get(0));
+        assertEquals("Go skydiving", testBucketList.allDescriptions().get(1));
     }
 
     @Test
     public void testAllActivityDescrEmpty() {
-        List<String> listOfActivities = testBucketList.allActivityDescr();
+        List<String> listOfActivities = testBucketList.allDescriptions();
 
         assertEquals(0, listOfActivities.size());
     }

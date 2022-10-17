@@ -81,7 +81,7 @@ public class BucketListApp {
         System.out.println("Enter activity description");
         String descr = input.next();
 
-        if (!bucketList.allActivityDescr().contains(descr)) {
+        if (!bucketList.allDescriptions().contains(descr)) {
             Activity activity = new Activity(descr);
             bucketList.addActivity(activity);
             System.out.println("Activity has been added to bucket list!");
@@ -96,7 +96,7 @@ public class BucketListApp {
         System.out.println("Enter activity to be removed from bucket list");
         String descr = input.next();
 
-        if (bucketList.allActivityDescr().contains(descr)) {
+        if (bucketList.allDescriptions().contains(descr)) {
             bucketList.removeActivity(descr);
             System.out.println("Activity removed from bucket list");
         } else {
@@ -111,7 +111,7 @@ public class BucketListApp {
         System.out.println("Enter activity that has been completed");
         String descr = input.next();
 
-        if (bucketList.allActivityDescr().contains(descr)) {
+        if (bucketList.allDescriptions().contains(descr)) {
             bucketList.markActivityComplete(descr);
             System.out.println("Activity has been marked as completed");
         } else {
@@ -137,7 +137,7 @@ public class BucketListApp {
             System.out.println("No activities in your bucket list");
         } else {
             System.out.println("Complete Bucket List:");
-            for (String s: bucketList.allActivityDescr()) {
+            for (String s: bucketList.allDescriptions()) {
                 System.out.println(s);
             }
         }

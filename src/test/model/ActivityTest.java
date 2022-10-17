@@ -24,4 +24,12 @@ class ActivityTest {
         testActivity.markCompleted();
         assertTrue(testActivity.getCompleted());
     }
+
+    @Test
+    public void testMarkCompletedMultipleTimes() {
+        testActivity.markCompleted();
+        testActivity.markCompleted();
+
+        assertTrue(testActivity.getCompleted());
+    }
 }

@@ -31,7 +31,7 @@ public class BucketList {
     }
 
     // EFFECTS: returns a list of every activity description in the bucket list
-    public List<String> allActivityDescr() {
+    public List<String> allDescriptions() {
         List<String> listOfDescr = new ArrayList<>();
         for (Activity a: bucketList) {
             listOfDescr.add(a.getDescription());
@@ -40,7 +40,7 @@ public class BucketList {
     }
 
     // EFFECTS: if an activity in the bucket list has the same description as descr, marks it as complete.
-    // Otherwise do nothing.
+    // Otherwise, do nothing.
     public void markActivityComplete(String descr) {
         for (Activity a: bucketList) {
             if (a.getDescription().equals(descr)) {
