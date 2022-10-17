@@ -95,13 +95,32 @@ public class BucketListTest {
     }
 
     @Test
-    public void testMarkItemAsAttained() {
+    public void testAllActivityDescrEmpty() {
+        List<String> listOfActivities = testBucketList.allActivityDescr();
+
+        assertEquals(0, listOfActivities.size());
+    }
+
+    @Test
+    public void testMarkItemAsCompleted() {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
         testBucketList.addActivity(a3);
         testBucketList.markActivityComplete("Run a marathon");
 
+        assertEquals(3, testBucketList.getBucketList().size());
         assertTrue(a3.getCompleted());
+        assertFalse(a1.getCompleted());
+        assertFalse(a2.getCompleted());
+    }
+
+    @Test
+    public void testMarkItemAsCompletedNotInList() {
+        testBucketList.addActivity(a1);
+        testBucketList.addActivity(a2);
+        testBucketList.markActivityComplete("Run a marathon");
+
+        assertEquals(2, testBucketList.getBucketList().size());
         assertFalse(a1.getCompleted());
         assertFalse(a2.getCompleted());
     }
