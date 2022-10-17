@@ -9,7 +9,7 @@ public class BucketList {
 
     // EFFECTS: constructs an empty BucketList
     public BucketList() {
-        bucketList = new ArrayList<>();
+        this.bucketList = new ArrayList<>();
     }
 
     // MODIFIES: this
@@ -45,5 +45,22 @@ public class BucketList {
     public List<Activity> allActivities() {
         return bucketList;
     }
+
+    public List<String> allActivityDescr() {
+        List<String> listOfDescr = new ArrayList<>();
+        for (Activity a: bucketList) {
+            listOfDescr.add(a.getDescription());
+        }
+        return listOfDescr;
+    }
+
+    public void markItemAsAttained(String descr) {
+        for (Activity a: bucketList) {
+            if (a.getDescription() == descr) {
+                a.markAttained();
+            }
+        }
+    }
+
 
 }

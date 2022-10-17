@@ -135,4 +135,27 @@ public class BucketListTest {
         assertEquals("Run a marathon", listOfActivities.get(2));
     }
 
+    @Test
+    public void testAllActivityDescr() {
+        testBucketList.addActivity(a1);
+        testBucketList.addActivity(a2);
+
+        List<String> listofActivities = testBucketList.allActivityDescr();
+
+        assertEquals(2, listofActivities.size());
+        assertEquals("Go surfing in Hawaii", listofActivities.get(0));
+        assertEquals("Go skydiving", listofActivities.get(1));
+    }
+
+    @Test
+    public void testMarkItemAsAttained() {
+        testBucketList.addActivity(a1);
+        testBucketList.addActivity(a2);
+        testBucketList.addActivity(a3);
+        testBucketList.markItemAsAttained("Run a marathon");
+
+        assertTrue(a3.getIsAttained());
+        assertFalse(a1.getIsAttained());
+        assertFalse(a2.getIsAttained());
+    }
 }

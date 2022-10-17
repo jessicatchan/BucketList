@@ -3,6 +3,7 @@ package ui;
 import model.Activity;
 import model.BucketList;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class BucketListApp {
@@ -68,60 +69,71 @@ public class BucketListApp {
         System.out.println("\tr -> remove activity");
         System.out.println("\tc -> check-off activity");
         System.out.println("\tv -> view all unattained activities");
+        System.out.println("\tq -> quit");
     }
 
-    // TODO: implementation
     // MODIFIES: this
     // EFFECTS: adds an activity to the bucket list if not already in bucket list
     private void addActivity() {
         System.out.println("Enter activity description");
         String description = input.next();
 
-        Activity activity = new Activity(description);
+        List<String> list = bucketList.allActivityDescr();
 
-        bucketList.addActivity(activity);
-
-
-        System.out.println("Activity is added to bucket list!");
+        if (!list.contains(description)) {
+            Activity activity = new Activity(description);
+            bucketList.addActivity(activity);
+            System.out.println("Activity has been added to bucket list!");
+        } else {
+            System.out.println("Activity is already in bucket list!");
+        }
     }
 
-    // TODO: implementation
     // MODIFIES: this
     // EFFECTS: removes activity from the bucket list
     private void removeThisActivity() {
         System.out.println("Enter activity to be removed from bucket list");
         String description = input.next();
 
-        bucketList.removeActivity(description);
+        List<String> list = bucketList.allActivityDescr();
 
-        System.out.println("Activity is not in bucket list");
+        if (list.contains(description)) {
+            bucketList.removeActivity(description);
+            System.out.println("Activity removed from bucket list");
+        } else {
+            System.out.println("Activity does not exist in bucket list");
+        }
     }
 
-    // TODO: implementation
     // MODIFIES: this
     // EFFECTS: marks input activity description as attained
     public void markActivityAsAttained() {
         System.out.println("Enter activity that has been attained");
         String description = input.next();
 
-        Activity activity = new Activity(description);
-        activity.markAttained();
+        List<String> list = bucketList.allActivityDescr();
 
-        System.out.println("Activity as been marked as attained");
+        if (list.contains(description)) {
+            bucketList.markItemAsAttained(description);
+            System.out.println("Activity has been marked as attained");
+        } else {
+            System.out.println("Activity not found");
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: prints list of activity descriptions that have not been complete yet
     public void viewActivities() {
-        System.out.println("Unattained Activities:");
+
+
         if (bucketList.unattainedActivities().size() == 0) {
             System.out.println("All activities completed!");
         } else {
+            System.out.println("Unattained activities:");
             for (String s: bucketList.unattainedActivities()) {
                 System.out.println("\n" + s);
             }
         }
     }
-
 
 }
