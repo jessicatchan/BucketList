@@ -23,11 +23,7 @@ public class BucketList {
     // MODIFIES: this
     // EFFECTS: if activity is in the bucket list, remove it. Otherwise, do nothing
     public void removeActivity(String activity) {
-        for (Activity a: bucketList) {
-            if (a.getDescription().equals(activity)) {
-                bucketList.remove(a);
-            }
-        }
+        bucketList.removeIf(activity1 -> activity1.getDescription().equals(activity));
     }
 
     // EFFECTS: returns a list of every activity description in the bucket list

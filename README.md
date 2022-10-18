@@ -17,6 +17,7 @@ keep track of fun activities for the future!
 
 **User Stories:**
 - As a user, I want to be able to add an activity to my bucket list.
-- As a user, I want to be able to view all the activities on my bucket list.
-- As a user, I want to be able to mark an activity as attained on my bucket list.
 - As a user, I want to be able to delete an activity from my bucket list.
+- As a user, I want to be able to mark an activity as complete on my bucket list.
+- As a user, I want to be able to view all the activities on my bucket list.
+- As a user, I want to be able to view all uncompleted activities on my bucket list.
