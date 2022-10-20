@@ -21,3 +21,7 @@ keep track of fun activities for the future!
 - As a user, I want to be able to mark an activity as complete on my bucket list.
 - As a user, I want to be able to view all the activities on my bucket list.
 - As a user, I want to be able to view all uncompleted activities on my bucket list.
+
+**P2 User Stories:**
+- As a user, I want to be able to save my bucket list to file
+- As a user, when I start the application, I want to be given the option to load my bucket list file.
