@@ -17,6 +17,7 @@ public class BucketListApp {
 
     // MODIFIES: this
     // EFFECTS: processes user input
+    // source: code based on cpsc210 teller application
     private void runBucketList() {
         boolean keepGoing = true;
         String command;
