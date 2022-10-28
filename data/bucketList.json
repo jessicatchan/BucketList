@@ -1,0 +1,14 @@
+{"activities": [
+    {
+        "description": "ziplining",
+        "completed": true
+    },
+    {
+        "description": "surfing",
+        "completed": false
+    },
+    {
+        "description": "baking",
+        "completed": false
+    }
+]}
