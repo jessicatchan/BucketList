@@ -32,4 +32,5 @@ class ActivityTest {
 
         assertTrue(testActivity.getCompleted());
     }
+
 }
