@@ -38,4 +38,5 @@ public class Activity implements Writable {
         json.put("completed", completed);
         return json;
     }
+
 }

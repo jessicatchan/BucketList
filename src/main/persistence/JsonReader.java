@@ -64,5 +64,4 @@ public class JsonReader {
         Activity activity = new Activity(description);
         bucketList.addActivity(activity);
     }
-
 }
