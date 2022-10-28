@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an activity with a description and whether it has been completed
-public class Activity {
+public class Activity implements Writable {
     private final String description;
     private boolean completed;
 
@@ -25,6 +28,14 @@ public class Activity {
 
     // EFFECTS: returns boolean, true if experience is complete, false otherwise
     public boolean getCompleted() {
-        return completed;
+        return this.completed;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("description", description);
+        json.put("completed", completed);
+        return json;
     }
 }

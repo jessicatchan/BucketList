@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a bucket list to store a users list of activities (bucket list).
-public class BucketList {
+public class BucketList implements Writable {
     private final List<Activity> bucketList;
 
     // EFFECTS: constructs an empty BucketList
@@ -48,5 +52,23 @@ public class BucketList {
     // EFFECTS: returns all the Activities in the bucket list
     public List<Activity> getBucketList() {
         return bucketList;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("activities", activitiesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns activites in bucket list as a JSON array
+    private JSONArray activitiesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Activity a: bucketList) {
+            jsonArray.put(a.toJson());
+        }
+        return jsonArray;
     }
 }

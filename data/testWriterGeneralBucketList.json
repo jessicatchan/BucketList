@@ -1,0 +1,10 @@
+{"activities": [
+    {
+        "description": "surfing in Maui",
+        "completed": true
+    },
+    {
+        "description": "ziplining",
+        "completed": false
+    }
+]}

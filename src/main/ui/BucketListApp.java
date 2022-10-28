@@ -2,16 +2,26 @@ package ui;
 
 import model.Activity;
 import model.BucketList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 // Represents a bucket list application
 public class BucketListApp {
-    private BucketList bucketList;
+    private static final String JSON_STORE = "./data/bucketList.json";
+    private final BucketList bucketList;
     private Scanner input;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
 
     // EFFECTS: runs the bucket list application
-    public BucketListApp() {
+    public BucketListApp() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        bucketList = new BucketList();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runBucketList();
     }
 
@@ -21,8 +31,7 @@ public class BucketListApp {
     private void runBucketList() {
         boolean keepGoing = true;
         String command;
-
-        init();
+        input = new Scanner((System.in));
 
         while (keepGoing) {
             displayMenu();
@@ -39,6 +48,19 @@ public class BucketListApp {
         System.out.println("\nGoodbye!");
     }
 
+    // EFFECTS: displays menu of options to user
+    private void displayMenu() {
+        System.out.println("\nSelect from:");
+        System.out.println("\ta -> add activity");
+        System.out.println("\tr -> remove activity");
+        System.out.println("\tc -> check-off activity");
+        System.out.println("\tv -> view uncompleted activities");
+        System.out.println("\tall -> view complete bucket list");
+        System.out.println("\ts -> save bucket list to file");
+        System.out.println("\tl -> load bucket list from file");
+        System.out.println("\tq -> quit");
+    }
+
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
@@ -52,28 +74,13 @@ public class BucketListApp {
             viewUncompletedActivities();
         } else if (command.equals("all")) {
             viewAllActivities();
+//        } else if (command.equals("s")) {
+//            saveBucketList();
+//        } else if (command.equals("l")) {
+//            loadBucketList();
         } else {
             System.out.println("Selection not valid...");
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: initializes bucket list
-    private void init() {
-        bucketList = new BucketList();
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-    }
-
-    // EFFECTS: displays menu of options to user
-    private void displayMenu() {
-        System.out.println("\nSelect from:");
-        System.out.println("\ta -> add activity");
-        System.out.println("\tr -> remove activity");
-        System.out.println("\tc -> check-off activity");
-        System.out.println("\tv -> view uncompleted activities");
-        System.out.println("\tall -> view complete bucket list");
-        System.out.println("\tq -> quit");
     }
 
     // MODIFIES: this
