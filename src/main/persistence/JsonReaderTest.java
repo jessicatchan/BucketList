@@ -40,9 +40,10 @@ public class JsonReaderTest extends JsonTest {
         try {
             BucketList bucketList = reader.read();
             List<Activity> activities = bucketList.getBucketList();
-            assertEquals(2, activities.size());
+            assertEquals(3, activities.size());
             checkActivity("ziplining", true, activities.get(0));
             checkActivity("surfing in Maui", false, activities.get(1));
+            checkActivity("cliff-jumping", false, activities.get(2));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

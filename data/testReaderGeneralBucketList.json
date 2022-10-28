@@ -7,6 +7,10 @@
     {
       "description": "surfing in Maui",
       "completed": false
+    },
+    {
+      "description": "cliff-jumping",
+      "completed": false
     }
   ]
 }
