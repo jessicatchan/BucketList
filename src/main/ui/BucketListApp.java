@@ -6,12 +6,13 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Represents a bucket list application
 public class BucketListApp {
     private static final String JSON_STORE = "./data/bucketList.json";
-    private final BucketList bucketList;
+    private BucketList bucketList;
     private Scanner input;
     private final JsonWriter jsonWriter;
     private final JsonReader jsonReader;
@@ -74,10 +75,10 @@ public class BucketListApp {
             viewUncompletedActivities();
         } else if (command.equals("all")) {
             viewAllActivities();
-//        } else if (command.equals("s")) {
-//            saveBucketList();
-//        } else if (command.equals("l")) {
-//            loadBucketList();
+        } else if (command.equals("s")) {
+            saveBucketList();
+        } else if (command.equals("l")) {
+            loadBucketList();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -87,10 +88,10 @@ public class BucketListApp {
     // EFFECTS: adds an activity to the bucket list if not already in bucket list
     private void addActivity() {
         System.out.println("Enter activity description");
-        String descr = input.next();
+        String description = input.next();
 
-        if (!bucketList.allDescriptions().contains(descr)) {
-            Activity activity = new Activity(descr);
+        if (!bucketList.allDescriptions().contains(description)) {
+            Activity activity = new Activity(description);
             bucketList.addActivity(activity);
             System.out.println("Activity has been added to bucket list!");
         } else {
@@ -148,6 +149,29 @@ public class BucketListApp {
             for (String s: bucketList.allDescriptions()) {
                 System.out.println(s);
             }
+        }
+    }
+
+    // EFFECTS: saves bucketList to file
+    private void saveBucketList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(bucketList);
+            jsonWriter.close();
+            System.out.println("Saved bucket list to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads bucketList from file
+    private void loadBucketList() {
+        try {
+            bucketList = jsonReader.read();
+            System.out.println("Loaded bucket list from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }
