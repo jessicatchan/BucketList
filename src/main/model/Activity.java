@@ -15,6 +15,13 @@ public class Activity implements Writable {
         this.completed = false;
     }
 
+    // REQUIRES: activity is not an empty string
+    // EFFECTS: constructs an activity with a description, and marks activity as true if completed, false otherwise
+    public Activity(String description, Boolean completed) {
+        this.description = description;
+        this.completed = completed;
+    }
+
     // MODIFIES: this
     // EFFECTS: marks the activity as completed
     public void markCompleted() {
@@ -28,7 +35,7 @@ public class Activity implements Writable {
 
     // EFFECTS: returns boolean, true if experience is complete, false otherwise
     public boolean getCompleted() {
-        return this.completed;
+        return completed;
     }
 
     @Override
@@ -38,5 +45,4 @@ public class Activity implements Writable {
         json.put("completed", completed);
         return json;
     }
-
 }

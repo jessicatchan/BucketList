@@ -39,7 +39,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses bucket list from JSON object and returns it
     private BucketList parseBucketList(JSONObject jsonObject) {
         BucketList bucketList = new BucketList();
         addActivities(bucketList, jsonObject);
@@ -61,7 +61,7 @@ public class JsonReader {
     private void addActivity(BucketList bucketList, JSONObject jsonObject) {
         String description = jsonObject.getString("description");
         boolean completed = Boolean.valueOf(jsonObject.getBoolean("completed"));
-        Activity activity = new Activity(description);
+        Activity activity = new Activity(description, completed);
         bucketList.addActivity(activity);
     }
 }

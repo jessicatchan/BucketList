@@ -20,6 +20,13 @@ class ActivityTest {
     }
 
     @Test
+    public void testConstructorTwo() {
+        Activity testActivityTwo = new Activity("Ziplining", true);
+        assertEquals("Ziplining", testActivityTwo.getDescription());
+        assertTrue(testActivityTwo.getCompleted());
+
+    }
+    @Test
     public void testMarkCompleted() {
         testActivity.markCompleted();
         assertTrue(testActivity.getCompleted());

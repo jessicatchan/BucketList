@@ -71,5 +71,4 @@ public class BucketList implements Writable {
         }
         return jsonArray;
     }
-
 }

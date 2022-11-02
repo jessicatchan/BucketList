@@ -42,8 +42,8 @@ public class JsonWriterTest extends JsonTest {
             JsonReader reader = new JsonReader("./data/testWriterGeneralBucketList.json");
             bucketList = reader.read();
             List<Activity> activities = bucketList.getBucketList();
-            checkActivity("surfing in Maui", false, activities.get(0));
-            checkActivity("ziplining", true, activities.get(1));
+            checkActivity("surfing in Maui", true, activities.get(0));
+            checkActivity("ziplining", false, activities.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");
