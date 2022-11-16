@@ -4,11 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a bucket list to store a users list of activities (bucket list).
-public class BucketList implements Writable {
+public class BucketList extends DefaultListModel implements Writable {
     private final List<Activity> bucketList;
 
     // EFFECTS: constructs an empty BucketList
