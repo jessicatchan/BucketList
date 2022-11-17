@@ -1,14 +1,1 @@
-{"activities": [
-    {
-        "description": "Surf",
-        "completed": false
-    },
-    {
-        "description": "Ski",
-        "completed": false
-    },
-    {
-        "description": "Fly",
-        "completed": false
-    }
-]}
+{"activities": []}

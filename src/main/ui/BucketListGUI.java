@@ -60,6 +60,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         removeButton = new JButton(removeString);
         removeButton.setActionCommand(removeString);
         removeButton.addActionListener(new RemoveListener());
+        removeButton.setEnabled(false);
 
         saveButton = new JButton(saveString);
         saveButton.setActionCommand(saveString);
@@ -165,6 +166,8 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String activityName = activityField.getText();
+
+            removeButton.setEnabled(true);
 
             if (activityName.equals("") || alreadyInList(activityName)) {
                 Toolkit.getDefaultToolkit().beep();
