@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Represents a bucket list to store a users list of activities (bucket list).
-public class BucketList extends DefaultListModel implements Writable {
+public class BucketList implements Writable {
     private final List<Activity> bucketList;
 
     // EFFECTS: constructs an empty BucketList
@@ -29,6 +29,12 @@ public class BucketList extends DefaultListModel implements Writable {
     // EFFECTS: if activity is in the bucket list, remove it. Otherwise, do nothing
     public void removeActivity(String activity) {
         bucketList.removeIf(activity1 -> activity1.getDescription().equals(activity));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes activity at given index
+    public void removeActivityAtIndex(int index) {
+        bucketList.remove(index);
     }
 
     // EFFECTS: returns a list of every activity description in the bucket list

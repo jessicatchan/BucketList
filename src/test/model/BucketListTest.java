@@ -55,6 +55,14 @@ public class BucketListTest {
     }
 
     @Test
+    public void testAddActivityAtIndex() {
+        testBucketList.addActivity(a1);
+        testBucketList.removeActivityAtIndex(0);
+
+        assertEquals(0, testBucketList.getBucketList().size());
+    }
+
+    @Test
     public void testRemoveActivity() {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);

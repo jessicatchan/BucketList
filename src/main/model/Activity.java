@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.util.Objects;
+
 // Represents an activity with a description and whether it has been completed
 public class Activity implements Writable {
     private final String description;
@@ -44,5 +46,22 @@ public class Activity implements Writable {
         json.put("description", description);
         json.put("completed", completed);
         return json;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Activity activity = (Activity) o;
+        return description.equals(activity.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 }

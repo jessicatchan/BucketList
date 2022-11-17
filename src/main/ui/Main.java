@@ -1,12 +1,10 @@
 package ui;
 
-import java.io.FileNotFoundException;
-
 public class Main {
-    public static void main(String[] args) {
-        BucketListGUI bucketListGUI = new BucketListGUI();
+    BucketListGUI bucketListGUI;
 
-        bucketListGUI.createGUI();
+    public static void main(String[] args) {
+        new BucketListGUI();
     }
 }
 
