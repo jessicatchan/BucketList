@@ -1,0 +1,23 @@
+Index: src/main/model/BucketList.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package model;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\n// Represents a bucket list to store a users list of activities (bucket list).\npublic class BucketList {\n    private final List<Activity> bucketList;\n\n    // EFFECTS: constructs an empty BucketList\n    public BucketList() {\n        this.bucketList = new ArrayList<>();\n    }\n\n    // MODIFIES: this\n    // EFFECTS: adds activity into bucket list unless it is already there, in which case do nothing\n    public void addActivity(Activity activity) {\n        if (!bucketList.contains(activity)) {\n            bucketList.add(activity);\n        }\n    }\n\n    // MODIFIES: this\n    // EFFECTS: if activity is in the bucket list, remove it. Otherwise, do nothing\n    public void removeActivity(String activity) {\n        bucketList.removeIf(activity1 -> activity1.getDescription().equals(activity));\n//        for (Activity a: bucketList) {\n//            if (a.getDescription().equals(activity)) {\n//                bucketList.remove(a);\n//\n//            }\n//        }\n    }\n\n    // EFFECTS: returns a list of every activity description in the bucket list\n    public List<String> allDescriptions() {\n        List<String> listOfDescr = new ArrayList<>();\n        for (Activity a: bucketList) {\n            listOfDescr.add(a.getDescription());\n        }\n        return listOfDescr;\n    }\n\n    // EFFECTS: if an activity in the bucket list has the same description as descr, marks it as complete.\n    // Otherwise, do nothing.\n    public void markActivityComplete(String descr) {\n        for (Activity a: bucketList) {\n            if (a.getDescription().equals(descr)) {\n                a.markCompleted();\n            }\n        }\n    }\n\n    // EFFECTS: returns all the Activities in the bucket list\n    public List<Activity> getBucketList() {\n        return bucketList;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/model/BucketList.java b/src/main/model/BucketList.java
+--- a/src/main/model/BucketList.java	
++++ b/src/main/model/BucketList.java	
+@@ -24,12 +24,6 @@
+     // EFFECTS: if activity is in the bucket list, remove it. Otherwise, do nothing
+     public void removeActivity(String activity) {
+         bucketList.removeIf(activity1 -> activity1.getDescription().equals(activity));
+-//        for (Activity a: bucketList) {
+-//            if (a.getDescription().equals(activity)) {
+-//                bucketList.remove(a);
+-//
+-//            }
+-//        }
+     }
+ 
+     // EFFECTS: returns a list of every activity description in the bucket list
