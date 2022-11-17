@@ -1,1 +1,10 @@
-{"activities": []}
+{"activities": [
+    {
+        "description": "ziplining",
+        "completed": false
+    },
+    {
+        "description": "skydiving",
+        "completed": false
+    }
+]}

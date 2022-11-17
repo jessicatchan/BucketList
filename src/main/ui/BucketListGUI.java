@@ -101,7 +101,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     }
 
-    // TODO
     class SaveListener implements ActionListener {
 
         @Override
@@ -167,8 +166,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         public void actionPerformed(ActionEvent e) {
             String activityName = activityField.getText();
 
-            removeButton.setEnabled(true);
-
             if (activityName.equals("") || alreadyInList(activityName)) {
                 Toolkit.getDefaultToolkit().beep();
                 activityField.requestFocusInWindow();
@@ -230,10 +227,15 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-
+        if (!e.getValueIsAdjusting()) {
+            if (bucketListJList.getSelectedIndex() == -1) {
+                removeButton.setEnabled(false);
+            } else {
+                removeButton.setEnabled(true);
+            }
+        }
     }
 
-    // FOR TESTING
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("Bucket List");
