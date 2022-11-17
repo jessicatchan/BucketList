@@ -5,15 +5,16 @@ import java.awt.*;
 
 public class Splash extends JWindow {
     private final int duration;
+    private final ImageIcon image;
 
-    public Splash(int d) {
+    public Splash(int d, String fileName) {
         duration = d;
+        image = new ImageIcon(fileName);
     }
 
     // A simple little method to show a title screen in the center
     // of the screen for the amount of time given in the constructor
-    public void showSplash(String fileName) {
-
+    public void showSplash() {
         JPanel content = (JPanel) getContentPane();
 
         // Set the window's bounds, centering the window
@@ -25,7 +26,7 @@ public class Splash extends JWindow {
         setBounds(x, y, width, height);
 
         // Build the splash screen
-        JLabel label = new JLabel(new ImageIcon(fileName));
+        JLabel label = new JLabel(image);
         content.add(label, BorderLayout.CENTER);
 
         // Display it

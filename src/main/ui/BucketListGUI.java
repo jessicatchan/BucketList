@@ -107,7 +107,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
             try {
                 jsonWriter.open();
                 jsonWriter.write(bucketList);
@@ -255,21 +254,18 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
-
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
-
-
 
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                Splash splashScreen = new Splash(2000);
-                splashScreen.showSplash("image1.jpeg");
+                Splash splashScreen = new Splash(2000, "./data/tobs.jpg");
+                splashScreen.showSplash();
                 createAndShowGUI();
             }
         });
