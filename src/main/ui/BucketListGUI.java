@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Represents a bucket list GUI
 public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     private final JList<String> bucketListJList;
@@ -101,10 +102,12 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     }
 
+    // Represents a listener that saves the state of the bucket list
     class SaveListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             try {
                 jsonWriter.open();
                 jsonWriter.write(bucketList);
@@ -117,12 +120,14 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // TODO
+    // Represents a listener that loads data from file into the bucket list
     class LoadListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
                 bucketList = jsonReader.read();
+                bucketList.allDescriptions();
 
                 System.out.println("Loaded bucket list from " + JSON_STORE);
             } catch (IOException ioException) {
@@ -131,6 +136,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         }
     }
 
+    // Represents a listener that removes activity from bucket list
     class RemoveListener implements ActionListener {
 
         @Override
@@ -154,6 +160,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         }
     }
 
+    // Represents a listener that adds an activity to a bucket list
     class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
         private final JButton button;
@@ -236,7 +243,9 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         }
     }
 
+    // EFFECTS: creates a GUI and shows it
     private static void createAndShowGUI() {
+
         //Create and set up the window.
         JFrame frame = new JFrame("Bucket List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -246,16 +255,21 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
+
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
+
+
 
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                Splash splashScreen = new Splash(2000);
+                splashScreen.showSplash("image1.jpeg");
                 createAndShowGUI();
             }
         });
