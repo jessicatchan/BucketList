@@ -20,7 +20,7 @@ import java.util.List;
 // Represents a bucket list GUI
 public class BucketListGUI extends JPanel implements ListSelectionListener {
 
-    private final JList<String> bucketListJList;
+    private JList<String> bucketListJList;
     private final DefaultListModel<String> listModel;
     private BucketList bucketList;
 
@@ -28,31 +28,47 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     private static final String removeString = "Remove Activity";
     private static final String saveString = "Save";
     private static final String loadString = "Load";
-    private final JButton removeButton;
+    private JButton removeButton;
+    private JButton addButton;
+    private JButton loadButton;
+    private JButton saveButton;
+    private AddListener addListener;
     private final JTextField activityField;           // allows editing of single line of text
+    private JScrollPane listScrollPane;
 
     private static final String JSON_STORE = "./data/bucketList.json";
     private final JsonReader jsonReader = new JsonReader(JSON_STORE);
     private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
 
-
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public BucketListGUI() {
         super(new BorderLayout());
 
         listModel = new DefaultListModel<>();
         bucketList = new BucketList();
 
-        // Create a bucket list and put it into the scroll pane
+        createBucketList();
+        createButtons();
+
+        activityField = new JTextField(15);
+        activityField.addActionListener(addListener);
+        activityField.getDocument().addDocumentListener(addListener);
+
+        createPanel();
+    }
+
+    // Create a bucket list and put it into the scroll pane
+    public void createBucketList() {
         bucketListJList = new JList<>(listModel);
         bucketListJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         bucketListJList.setSelectedIndex(0);
         bucketListJList.addListSelectionListener(this);
         bucketListJList.setVisibleRowCount(10);
-        JScrollPane listScrollPane = new JScrollPane(bucketListJList);
+        listScrollPane = new JScrollPane(bucketListJList);
+    }
 
-        JButton addButton = new JButton(addString);
-        AddListener addListener = new AddListener(addButton);
+    public void createButtons() {
+        addButton = new JButton(addString);
+        addListener = new AddListener(addButton);
         addButton.setActionCommand(addString);
         addButton.addActionListener(addListener);
         addButton.setEnabled(false);
@@ -62,20 +78,17 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         removeButton.addActionListener(new RemoveListener());
         removeButton.setEnabled(false);
 
-        JButton saveButton = new JButton(saveString);
+        saveButton = new JButton(saveString);
         saveButton.setActionCommand(saveString);
         saveButton.addActionListener(new SaveListener());
 
-        JButton loadButton = new JButton(loadString);
+        loadButton = new JButton(loadString);
         loadButton.setActionCommand(loadString);
         loadButton.addActionListener(new LoadListener());
+    }
 
-        activityField = new JTextField(15);
-        activityField.addActionListener(addListener);
-        activityField.getDocument().addDocumentListener(addListener);
-
-        // Create panel using BoxLayout
-
+    // Create panel using BoxLayout
+    public void createPanel() {
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
 
@@ -106,6 +119,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
     }
+
 
     // Represents a listener that saves the state of the bucket list
     class SaveListener implements ActionListener {
@@ -265,5 +279,15 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        //Schedule a job for the event-dispatching thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        });
     }
 }
