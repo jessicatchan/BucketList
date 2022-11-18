@@ -25,3 +25,13 @@ keep track of fun activities for the future!
 **P2 User Stories:**
 - As a user, I want to be able to save my bucket list to file
 - As a user, when I start the application, I want to be given the option to load my bucket list file.
+
+# Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by clicking the button labelled "Add Activity," 
+this adds an activity (X) to the bucket list (Y).
+- You can generate the second required event related to adding Xs to a Y by clicking on the button labelled "Remove Activity," 
+this removes an activity from the bucket list.
+- You can locate my visual component by running my main method, it is located at the top (an image of the sky titled "bucket list").
+- You can save the state of my application by clicking the button labelled "Save", this saves the state of the application to a json file.
+- You can reload the state of my application by clicking the button labelled "Load", this loads the state of the application from an existing json file.

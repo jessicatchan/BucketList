@@ -75,13 +75,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         activityField.getDocument().addDocumentListener(addListener);
 
         // Create panel using BoxLayout
-        JPanel container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-
-        ImageIcon image = new ImageIcon("./data/image.png");
-        JLabel imageLabel = new JLabel(image);
-        JPanel imagePane = new JPanel();
-        imagePane.add(imageLabel);
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
@@ -104,7 +97,10 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
         buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        container.add(imagePane);
+        ImageIcon image = new ImageIcon("./data/image.png");
+        JLabel imageLabel = new JLabel(image);
+        JPanel imagePane = new JPanel();
+        imagePane.add(imageLabel);
 
         add(imagePane, BorderLayout.NORTH);
         add(listScrollPane, BorderLayout.CENTER);
