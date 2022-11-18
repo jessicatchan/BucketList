@@ -40,6 +40,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     private final JsonReader jsonReader = new JsonReader(JSON_STORE);
     private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
 
+    // Represents a bucket list gui that users can interact with
     public BucketListGUI() {
         super(new BorderLayout());
 
@@ -56,7 +57,8 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         createPanel();
     }
 
-    // Create a bucket list and put it into the scroll pane
+    // MODIFIES: this
+    // EFFECTS: Creates a bucket list and puts it into the scroll pane
     public void createBucketList() {
         bucketListJList = new JList<>(listModel);
         bucketListJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -66,6 +68,8 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         listScrollPane = new JScrollPane(bucketListJList);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates an add, remove, save and load button with commands
     public void createButtons() {
         addButton = new JButton(addString);
         addListener = new AddListener(addButton);
@@ -87,7 +91,8 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         loadButton.addActionListener(new LoadListener());
     }
 
-    // Create panel using BoxLayout
+    // MODIFIES: this
+    // EFFECTS: creates a panel with BoxLayout
     public void createPanel() {
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
@@ -119,7 +124,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
     }
-
 
     // Represents a listener that saves the state of the bucket list
     class SaveListener implements ActionListener {
@@ -158,7 +162,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    // Represents a listener that removes activity from bucket list
+    // Represents a listener that removes an activity from the bucket list
     class RemoveListener implements ActionListener {
 
         @Override
@@ -182,7 +186,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    // Represents a listener that adds an activity to a bucket list
+    // Represents a listener that adds an activity to the bucket list
     class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
         private final JButton button;
@@ -212,12 +216,12 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
             listModel.addElement(activityName);
             bucketList.addActivity(new Activity(activityName));
 
-            // Reset the text field
             bucketListJList.setSelectedIndex(index);
             bucketListJList.ensureIndexIsVisible(index);
         }
 
-        protected boolean alreadyInList(String activityName) {
+        // EFFECTS: returns true if the activityName is already in the list model, false otherwise
+        private boolean alreadyInList(String activityName) {
             return listModel.contains(activityName);
         }
 
@@ -238,12 +242,14 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
             }
         }
 
+        // TODO: implementation
         private void enableButton() {
             if (!alreadyEnabled) {
                 button.setEnabled(true);
             }
         }
 
+        // TOOD: implementation
         private boolean handleEmptyTextField(DocumentEvent e) {
             if (e.getDocument().getLength() <= 0) {
                 button.setEnabled(false);
@@ -266,24 +272,18 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     // EFFECTS: creates a GUI and shows it
     protected static void createAndShowGUI() {
-
-        //Create and set up the window.
         JFrame frame = new JFrame("Bucket List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Create and set up the content pane.
         JComponent newContentPane = new BucketListGUI();
-        newContentPane.setOpaque(true); //content panes must be opaque
+        newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
 
-        //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();

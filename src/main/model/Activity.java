@@ -3,8 +3,6 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.Objects;
-
 // Represents an activity with a description and whether it has been completed
 public class Activity implements Writable {
     private final String description;

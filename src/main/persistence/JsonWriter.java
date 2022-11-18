@@ -3,7 +3,6 @@ package persistence;
 import model.BucketList;
 import org.json.JSONObject;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -32,7 +31,6 @@ public class JsonWriter {
         JSONObject json = bucketList.toJson();
         saveToFile(json.toString(TAB));
     }
-
 
     // MODIFIES: this
     // EFFECTS: closes writer
