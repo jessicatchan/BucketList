@@ -8,13 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 // Represents a writer that writes JSON representation of bucketList to file
-// Source: cpsc 210 workroom for JsonWriter class
+// Source: adapted from cpsc 210 workroom for JsonWriter class
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private final String destination;
 
-    // EFFECTS: contructs writer to write to destination file
+    // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
         this.destination = destination;
     }

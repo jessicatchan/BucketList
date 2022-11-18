@@ -22,7 +22,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     private JList<String> bucketListJList;
     private final DefaultListModel<String> listModel;
-    private BucketList bucketList;
 
     private static final String addString = "Add Activity";
     private static final String removeString = "Remove Activity";
@@ -33,32 +32,27 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     private JButton loadButton;
     private JButton saveButton;
     private AddListener addListener;
-    private final JTextField activityField;           // allows editing of single line of text
+    private JTextField activityField;
     private JScrollPane listScrollPane;
 
     private static final String JSON_STORE = "./data/bucketList.json";
     private final JsonReader jsonReader = new JsonReader(JSON_STORE);
     private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
 
-    // Represents a bucket list gui that users can interact with
+    // EFFECTS: produces a bucket list GUI using Java Swing library
     public BucketListGUI() {
         super(new BorderLayout());
 
         listModel = new DefaultListModel<>();
-        bucketList = new BucketList();
 
         createBucketList();
         createButtons();
-
-        activityField = new JTextField(15);
-        activityField.addActionListener(addListener);
-        activityField.getDocument().addDocumentListener(addListener);
-
+        createActivityField();
         createPanel();
     }
 
     // MODIFIES: this
-    // EFFECTS: Creates a bucket list and puts it into the scroll pane
+    // EFFECTS: Creates a bucket list and puts it into a scroll pane
     public void createBucketList() {
         bucketListJList = new JList<>(listModel);
         bucketListJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -89,6 +83,14 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         loadButton = new JButton(loadString);
         loadButton.setActionCommand(loadString);
         loadButton.addActionListener(new LoadListener());
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Creates a text field
+    public void createActivityField() {
+        activityField = new JTextField(15);
+        activityField.addActionListener(addListener);
+        activityField.getDocument().addDocumentListener(addListener);
     }
 
     // MODIFIES: this
@@ -132,12 +134,25 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         public void actionPerformed(ActionEvent e) {
             try {
                 jsonWriter.open();
-                jsonWriter.write(bucketList);
+                jsonWriter.write(toBucketList(listModel));
                 jsonWriter.close();
                 System.out.println("Saved bucket list to " + JSON_STORE);
             } catch (FileNotFoundException fileNotFoundException) {
                 System.out.println("Unable to write to file: " + JSON_STORE);
             }
+        }
+
+        // EFFECTS: converts default list model to a bucket list object
+        public BucketList toBucketList(DefaultListModel<String> list) {
+            BucketList bucketList = new BucketList();
+            int index = 0;
+
+            while (index < list.getSize()) {
+                Activity activity = new Activity(list.getElementAt(index));
+                bucketList.addActivity(activity);
+                index++;
+            }
+            return bucketList;
         }
     }
 
@@ -147,7 +162,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                bucketList = jsonReader.read();
+                BucketList bucketList = jsonReader.read();
                 List<String> listOfDescr = bucketList.allDescriptions();
 
                 for (String s: listOfDescr) {
@@ -169,7 +184,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         public void actionPerformed(ActionEvent e) {
             int index = bucketListJList.getSelectedIndex();
             listModel.remove(index);
-            bucketList.removeActivityAtIndex(index);
 
             int size = listModel.getSize();
 
@@ -191,6 +205,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         private boolean alreadyEnabled = false;
         private final JButton button;
 
+        // EFFECTS: constructs a listener with a button
         public AddListener(JButton button) {
             this.button = button;
         }
@@ -214,7 +229,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
             }
 
             listModel.addElement(activityName);
-            bucketList.addActivity(new Activity(activityName));
 
             bucketListJList.setSelectedIndex(index);
             bucketListJList.ensureIndexIsVisible(index);
@@ -242,14 +256,17 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
             }
         }
 
-        // TODO: implementation
+        // MODIFIES: this
+        // EFFECTS: enables button if it is not already enabled, does nothing is button is already enabled
         private void enableButton() {
             if (!alreadyEnabled) {
                 button.setEnabled(true);
             }
         }
 
-        // TOOD: implementation
+        // MODIFIES: this
+        // EFFECTS: if the text field is empty, does not enable button. Else, enables button.
+        // True if text field is empty, false otherwise.
         private boolean handleEmptyTextField(DocumentEvent e) {
             if (e.getDocument().getLength() <= 0) {
                 button.setEnabled(false);
@@ -271,7 +288,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // EFFECTS: creates a GUI and shows it
-    protected static void createAndShowGUI() {
+    private static void createAndShowGUI() {
         JFrame frame = new JFrame("Bucket List");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

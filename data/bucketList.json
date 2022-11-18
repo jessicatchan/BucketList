@@ -1,14 +1,22 @@
 {"activities": [
     {
-        "description": "ziplining",
+        "description": "go skydiving",
         "completed": false
     },
     {
-        "description": "parasailing",
+        "description": "skiing",
         "completed": false
     },
     {
-        "description": "make crackers",
+        "description": "snowboard",
+        "completed": false
+    },
+    {
+        "description": "learn to surf",
+        "completed": false
+    },
+    {
+        "description": "bake a massive cookie",
         "completed": false
     }
 ]}

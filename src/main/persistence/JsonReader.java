@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 // Represents a reader that reads bucketlist from JSON data stored in file
-// Source: cpsc 210 workroom for JsonReader class
+// Source: adapted from cpsc 210 workroom for JsonReader class
 public class JsonReader {
     private final String source;
 
