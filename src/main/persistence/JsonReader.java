@@ -5,6 +5,7 @@ import model.BucketList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -60,7 +61,7 @@ public class JsonReader {
     // EFFECTS: parses activity from JSON object and adds it to bucketList
     private void addActivity(BucketList bucketList, JSONObject jsonObject) {
         String description = jsonObject.getString("description");
-        boolean completed = Boolean.valueOf(jsonObject.getBoolean("completed"));
+        boolean completed = jsonObject.getBoolean("completed");
         Activity activity = new Activity(description, completed);
         bucketList.addActivity(activity);
     }

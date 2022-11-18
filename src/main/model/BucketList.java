@@ -61,7 +61,6 @@ public class BucketList implements Writable {
         return bucketList;
     }
 
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -69,7 +68,7 @@ public class BucketList implements Writable {
         return json;
     }
 
-    // EFFECTS: returns activites in bucket list as a JSON array
+    // EFFECTS: returns activities in bucket list as a JSON array
     private JSONArray activitiesToJson() {
         JSONArray jsonArray = new JSONArray();
 

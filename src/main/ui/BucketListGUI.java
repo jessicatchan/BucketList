@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 // Represents a bucket list GUI
 public class BucketListGUI extends JPanel implements ListSelectionListener {
@@ -27,15 +28,13 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     private static final String removeString = "Remove Activity";
     private static final String saveString = "Save";
     private static final String loadString = "Load";
-    private final JButton addButton;                   // push button
     private final JButton removeButton;
     private final JTextField activityField;           // allows editing of single line of text
-    private final JButton saveButton;
-    private final JButton loadButton;
 
     private static final String JSON_STORE = "./data/bucketList.json";
     private final JsonReader jsonReader = new JsonReader(JSON_STORE);
     private final JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public BucketListGUI() {
@@ -52,7 +51,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         bucketListJList.setVisibleRowCount(10);
         JScrollPane listScrollPane = new JScrollPane(bucketListJList);
 
-        addButton = new JButton(addString);
+        JButton addButton = new JButton(addString);
         AddListener addListener = new AddListener(addButton);
         addButton.setActionCommand(addString);
         addButton.addActionListener(addListener);
@@ -63,11 +62,11 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         removeButton.addActionListener(new RemoveListener());
         removeButton.setEnabled(false);
 
-        saveButton = new JButton(saveString);
+        JButton saveButton = new JButton(saveString);
         saveButton.setActionCommand(saveString);
         saveButton.addActionListener(new SaveListener());
 
-        loadButton = new JButton(loadString);
+        JButton loadButton = new JButton(loadString);
         loadButton.setActionCommand(loadString);
         loadButton.addActionListener(new LoadListener());
 
@@ -76,9 +75,16 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         activityField.getDocument().addDocumentListener(addListener);
 
         // Create panel using BoxLayout
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+
+        ImageIcon image = new ImageIcon("./data/image.png");
+        JLabel imageLabel = new JLabel(image);
+        JPanel imagePane = new JPanel();
+        imagePane.add(imageLabel);
+
         JPanel buttonPane = new JPanel();
-        buttonPane.setLayout(new BoxLayout(buttonPane,
-                BoxLayout.LINE_AXIS));
+        buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
 
         buttonPane.add(loadButton);
         buttonPane.add(saveButton);
@@ -86,6 +92,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         buttonPane.add(Box.createHorizontalStrut(5));
         buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
         buttonPane.add(Box.createHorizontalStrut(5));
+
         buttonPane.add(activityField);
 
         buttonPane.add(Box.createHorizontalStrut(5));
@@ -95,11 +102,13 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         buttonPane.add(addButton);
         buttonPane.add(removeButton);
 
-        buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+        container.add(imagePane);
+
+        add(imagePane, BorderLayout.NORTH);
         add(listScrollPane, BorderLayout.CENTER);
         add(buttonPane, BorderLayout.PAGE_END);
-
     }
 
     // Represents a listener that saves the state of the bucket list
@@ -118,7 +127,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    // TODO
     // Represents a listener that loads data from file into the bucket list
     class LoadListener implements ActionListener {
 
@@ -126,8 +134,13 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         public void actionPerformed(ActionEvent e) {
             try {
                 bucketList = jsonReader.read();
-                bucketList.allDescriptions();
+                List<String> listOfDescr = bucketList.allDescriptions();
 
+                for (String s: listOfDescr) {
+                    if (!listModel.contains(s)) {
+                        listModel.addElement(s);
+                    }
+                }
                 System.out.println("Loaded bucket list from " + JSON_STORE);
             } catch (IOException ioException) {
                 System.out.println("Unable to read from file: " + JSON_STORE);
@@ -234,16 +247,15 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
+            removeButton.setEnabled(true);
             if (bucketListJList.getSelectedIndex() == -1) {
                 removeButton.setEnabled(false);
-            } else {
-                removeButton.setEnabled(true);
             }
         }
     }
 
     // EFFECTS: creates a GUI and shows it
-    private static void createAndShowGUI() {
+    protected static void createAndShowGUI() {
 
         //Create and set up the window.
         JFrame frame = new JFrame("Bucket List");
@@ -257,17 +269,5 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Splash splashScreen = new Splash(2000, "./data/tobs.jpg");
-                splashScreen.showSplash();
-                createAndShowGUI();
-            }
-        });
     }
 }
