@@ -45,7 +45,6 @@ public class BucketListApp {
                 processCommand(command);
             }
         }
-
         System.out.println("\nGoodbye!");
     }
 
