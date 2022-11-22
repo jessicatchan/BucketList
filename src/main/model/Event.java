@@ -5,12 +5,12 @@ import java.util.Date;
 
 
 /**
- * Represents an alarm system event.
+ * Represents a bucket list event.
  */
 public class Event {
     private static final int HASH_CONSTANT = 13;
-    private Date dateLogged;
-    private String description;
+    private final Date dateLogged;
+    private final String description;
 
     /**
      * Creates an event with the given description

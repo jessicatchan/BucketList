@@ -13,6 +13,7 @@ public class Activity implements Writable {
     public Activity(String description) {
         this.description = description;
         this.completed = false;
+        EventLog.getInstance().logEvent(new Event("Activity created."));
     }
 
     // REQUIRES: activity is not an empty string
@@ -20,6 +21,7 @@ public class Activity implements Writable {
     public Activity(String description, Boolean completed) {
         this.description = description;
         this.completed = completed;
+        EventLog.getInstance().logEvent(new Event("Activity created."));
     }
 
     // MODIFIES: this

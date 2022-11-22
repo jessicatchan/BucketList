@@ -22,12 +22,14 @@ public class BucketList implements Writable {
         if (!bucketList.contains(activity)) {
             bucketList.add(activity);
         }
+        EventLog.getInstance().logEvent(new Event("Activity added: " + activity.getDescription()));
     }
 
     // MODIFIES: this
     // EFFECTS: if activity is in the bucket list, remove it. Otherwise, do nothing
     public void removeActivity(String activity) {
         bucketList.removeIf(activity1 -> activity1.getDescription().equals(activity));
+        EventLog.getInstance().logEvent(new Event("Removed activity:" + activity));
     }
 
     // MODIFIES: this
