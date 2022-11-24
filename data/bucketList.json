@@ -1,1 +1,34 @@
-{"activities": []}
+{"activities": [
+    {
+        "description": "ziplining",
+        "completed": false
+    },
+    {
+        "description": "skateboard",
+        "completed": false
+    },
+    {
+        "description": "skii in seattle",
+        "completed": false
+    },
+    {
+        "description": "see taylor swift",
+        "completed": false
+    },
+    {
+        "description": "run a marathon",
+        "completed": false
+    },
+    {
+        "description": "cliffjumping in maui",
+        "completed": false
+    },
+    {
+        "description": "polar bear swim",
+        "completed": false
+    },
+    {
+        "description": "go cliffjumping",
+        "completed": false
+    }
+]}

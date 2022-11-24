@@ -2,6 +2,9 @@ package ui;
 
 import model.Activity;
 import model.BucketList;
+import model.Event;
+import model.EventLog;
+import model.LogException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -13,8 +16,11 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.EventListener;
 import java.util.List;
 
 // Represents a bucket list GUI
@@ -22,6 +28,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     private JList<String> bucketListJList;
     private final DefaultListModel<String> listModel;
+    private BucketList bucketList;
 
     private static final String addString = "Add Activity";
     private static final String removeString = "Remove Activity";
@@ -44,6 +51,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         super(new BorderLayout());
 
         listModel = new DefaultListModel<>();
+        bucketList = new BucketList();
 
         createBucketList();
         createButtons();
@@ -52,7 +60,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: Creates a bucket list and puts it into a scroll pane
+    // EFFECTS: Creates a users bucket list and puts it into a scroll pane
     public void createBucketList() {
         bucketListJList = new JList<>(listModel);
         bucketListJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -128,7 +136,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // Represents a listener that saves the state of the bucket list
-    class SaveListener implements ActionListener {
+    private class SaveListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -157,12 +165,12 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // Represents a listener that loads data from file into the bucket list
-    class LoadListener implements ActionListener {
+    private class LoadListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                BucketList bucketList = jsonReader.read();
+                bucketList = jsonReader.read();
                 List<String> listOfDescr = bucketList.allDescriptions();
 
                 for (String s: listOfDescr) {
@@ -178,12 +186,13 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // Represents a listener that removes an activity from the bucket list
-    class RemoveListener implements ActionListener {
+    private class RemoveListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             int index = bucketListJList.getSelectedIndex();
             listModel.remove(index);
+            bucketList.removeActivityAtIndex(index);
 
             int size = listModel.getSize();
 
@@ -201,7 +210,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // Represents a listener that adds an activity to the bucket list
-    class AddListener implements ActionListener, DocumentListener {
+    private class AddListener implements ActionListener, DocumentListener {
         private boolean alreadyEnabled = false;
         private final JButton button;
 
@@ -229,6 +238,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
             }
 
             listModel.addElement(activityName);
+            bucketList.addActivity(new Activity(activityName));
 
             bucketListJList.setSelectedIndex(index);
             bucketListJList.ensureIndexIsVisible(index);
@@ -290,8 +300,22 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     // EFFECTS: creates a GUI and shows it
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("Bucket List");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+//            LogPrinter lp; // TODO: instantiate object
+            @Override
+            public void windowClosing(WindowEvent e) {
+//                try {
+                    System.out.println("PRINT LOG");
+//                    lp.printLog(EventLog.getInstance());
+//                } catch (LogException ex) {
+//                    JOptionPane.showMessageDialog(null, ex.getMessage(), "System Error",
+//                            JOptionPane.ERROR_MESSAGE);
+//                }
+                System.exit(0);
+            }
+        });
+        
         JComponent newContentPane = new BucketListGUI();
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);

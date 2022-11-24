@@ -29,13 +29,14 @@ public class BucketList implements Writable {
     // EFFECTS: if activity is in the bucket list, remove it. Otherwise, do nothing
     public void removeActivity(String activity) {
         bucketList.removeIf(activity1 -> activity1.getDescription().equals(activity));
-        EventLog.getInstance().logEvent(new Event("Removed activity:" + activity));
     }
 
     // MODIFIES: this
     // EFFECTS: removes activity at given index
     public void removeActivityAtIndex(int index) {
+        String activityName = bucketList.get(index).getDescription();
         bucketList.remove(index);
+        EventLog.getInstance().logEvent(new Event("Removed activity:" + activityName));
     }
 
     // EFFECTS: returns a list of every activity description in the bucket list
