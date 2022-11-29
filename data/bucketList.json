@@ -1,18 +1,10 @@
 {"activities": [
     {
-        "description": "ziplining",
+        "description": "Learn how to surf",
         "completed": false
     },
     {
-        "description": "skateboard",
-        "completed": false
-    },
-    {
-        "description": "skii in seattle",
-        "completed": false
-    },
-    {
-        "description": "see taylor swift",
+        "description": "bake a 10 layer cake",
         "completed": false
     },
     {
@@ -20,15 +12,7 @@
         "completed": false
     },
     {
-        "description": "cliffjumping in maui",
-        "completed": false
-    },
-    {
-        "description": "polar bear swim",
-        "completed": false
-    },
-    {
-        "description": "go cliffjumping",
+        "description": "travel",
         "completed": false
     }
 ]}

@@ -35,3 +35,26 @@ this removes an activity from the bucket list.
 - You can locate my visual component by running the main method in the bucketListGUI class, it is located at the top of the frame (an image of the sky titled "bucket list").
 - You can save the state of my application by clicking the button labelled "Save", this saves the state of the application to a json file.
 - You can reload the state of my application by clicking the button labelled "Load", this loads the state of the application from the json file.
+
+# Phase 4: Task 2
+
+Mon Nov 28 22:36:57 PST 2022\
+Activity added: sailing
+
+Mon Nov 28 22:37:00 PST 2022\
+Activity added: surfing
+
+Mon Nov 28 22:37:04 PST 2022\
+Activity added: bungee jumping
+
+Mon Nov 28 22:37:07 PST 2022\
+Removed activity: sailing
+
+Mon Nov 28 22:37:13 PST 2022\
+Activity added: skydiving
+
+Mon Nov 28 22:37:16 PST 2022\
+Removed activity: surfing
+
+Mon Nov 28 22:37:26 PST 2022\
+Activity added: surfing

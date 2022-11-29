@@ -2,7 +2,6 @@ package ui;
 
 import model.Activity;
 import model.BucketList;
-import model.Event;
 import model.EventLog;
 import model.LogException;
 import persistence.JsonReader;
@@ -20,7 +19,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.EventListener;
 import java.util.List;
 
 // Represents a bucket list GUI
@@ -142,25 +140,12 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         public void actionPerformed(ActionEvent e) {
             try {
                 jsonWriter.open();
-                jsonWriter.write(toBucketList(listModel));
+                jsonWriter.write(bucketList);
                 jsonWriter.close();
                 System.out.println("Saved bucket list to " + JSON_STORE);
             } catch (FileNotFoundException fileNotFoundException) {
                 System.out.println("Unable to write to file: " + JSON_STORE);
             }
-        }
-
-        // EFFECTS: converts default list model to a bucket list object
-        public BucketList toBucketList(DefaultListModel<String> list) {
-            BucketList bucketList = new BucketList();
-            int index = 0;
-
-            while (index < list.getSize()) {
-                Activity activity = new Activity(list.getElementAt(index));
-                bucketList.addActivity(activity);
-                index++;
-            }
-            return bucketList;
         }
     }
 
@@ -302,16 +287,15 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         JFrame frame = new JFrame("Bucket List");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
-//            LogPrinter lp; // TODO: instantiate object
+            final ConsolePrinter consolePrinter = new ConsolePrinter();
+
             @Override
             public void windowClosing(WindowEvent e) {
-//                try {
-                    System.out.println("PRINT LOG");
-//                    lp.printLog(EventLog.getInstance());
-//                } catch (LogException ex) {
-//                    JOptionPane.showMessageDialog(null, ex.getMessage(), "System Error",
-//                            JOptionPane.ERROR_MESSAGE);
-//                }
+                try {
+                    consolePrinter.printLog(EventLog.getInstance());
+                } catch (LogException ex) {
+                    System.out.println("System error, LogException caught");
+                }
                 System.exit(0);
             }
         });

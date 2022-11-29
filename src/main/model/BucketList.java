@@ -36,7 +36,7 @@ public class BucketList implements Writable {
     public void removeActivityAtIndex(int index) {
         String activityName = bucketList.get(index).getDescription();
         bucketList.remove(index);
-        EventLog.getInstance().logEvent(new Event("Removed activity:" + activityName));
+        EventLog.getInstance().logEvent(new Event("Removed activity: " + activityName));
     }
 
     // EFFECTS: returns a list of every activity description in the bucket list
