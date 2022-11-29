@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.List;
 
 // Represents a bucket list GUI
+// Adapted from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html ListDemo example
 public class BucketListGUI extends JPanel implements ListSelectionListener {
 
     private JList<String> bucketListJList;
@@ -282,7 +283,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         }
     }
 
-    // EFFECTS: creates a GUI and shows it
+    // EFFECTS: creates a GUI and shows it. Prints event log to console after the user quits the application.
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("Bucket List");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
