@@ -3,6 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,6 +20,7 @@ public class BucketListTest {
         a1 = new Activity("Go surfing in Hawaii");
         a2 = new Activity("Go skydiving");
         a3 = new Activity("Run a marathon");
+        EventLog.getInstance().clear();
     }
 
     @Test
@@ -33,6 +35,13 @@ public class BucketListTest {
         assertEquals(1, testBucketList.getBucketList().size());
         assertTrue(testBucketList.getBucketList().contains(a1));
         assertEquals(a1, testBucketList.getBucketList().get(0));
+
+        Iterator<Event> itr = EventLog.getInstance().iterator();
+        assertTrue(itr.hasNext());
+        assertEquals("Event log cleared.", itr.next().getDescription());
+        assertTrue(itr.hasNext());
+        assertEquals("Activity added: Go surfing in Hawaii", itr.next().getDescription());
+        assertFalse(itr.hasNext());
     }
 
     @Test
@@ -43,6 +52,15 @@ public class BucketListTest {
         assertEquals(2, testBucketList.getBucketList().size());
         assertEquals(a1, testBucketList.getBucketList().get(0));
         assertEquals(a2, testBucketList.getBucketList().get(1));
+
+        Iterator<Event> itr = EventLog.getInstance().iterator();
+        assertTrue(itr.hasNext());
+        assertEquals("Event log cleared.", itr.next().getDescription());
+        assertTrue(itr.hasNext());
+        assertEquals("Activity added: Go surfing in Hawaii", itr.next().getDescription());
+        assertTrue(itr.hasNext());
+        assertEquals("Activity added: Go skydiving", itr.next().getDescription());
+        assertFalse(itr.hasNext());
     }
 
     @Test
@@ -52,6 +70,13 @@ public class BucketListTest {
 
         assertEquals(1, testBucketList.getBucketList().size());
         assertTrue(testBucketList.getBucketList().contains(a1));
+
+        Iterator<Event> itr = EventLog.getInstance().iterator();
+        assertTrue(itr.hasNext());
+        assertEquals("Event log cleared.", itr.next().getDescription());
+        assertTrue(itr.hasNext());
+        assertEquals("Activity added: Go surfing in Hawaii", itr.next().getDescription());
+        assertFalse(itr.hasNext());
     }
 
     @Test
@@ -60,17 +85,32 @@ public class BucketListTest {
         testBucketList.removeActivityAtIndex(0);
 
         assertEquals(0, testBucketList.getBucketList().size());
+
+        Iterator<Event> itr = EventLog.getInstance().iterator();
+        assertEquals("Event log cleared.", itr.next().getDescription());
+        assertEquals("Activity added: Go surfing in Hawaii", itr.next().getDescription());
+        assertTrue(itr.hasNext());
+        assertEquals("Removed activity: Go surfing in Hawaii", itr.next().getDescription());
+        assertFalse(itr.hasNext());
     }
 
     @Test
     public void testRemoveActivity() {
         testBucketList.addActivity(a1);
         testBucketList.addActivity(a2);
-        testBucketList.removeActivity("Go surfing in Hawaii");
+        testBucketList.removeActivityAtIndex(0);
 
         assertEquals(1, testBucketList.getBucketList().size());
         assertTrue(testBucketList.getBucketList().contains(a2));
         assertFalse(testBucketList.getBucketList().contains(a1));
+
+        Iterator<Event> itr = EventLog.getInstance().iterator();
+        assertEquals("Event log cleared.", itr.next().getDescription());
+        assertEquals("Activity added: Go surfing in Hawaii", itr.next().getDescription());
+        assertEquals("Activity added: Go skydiving", itr.next().getDescription());
+        assertTrue(itr.hasNext());
+        assertEquals("Removed activity: Go surfing in Hawaii", itr.next().getDescription());
+        assertFalse(itr.hasNext());
     }
 
     @Test

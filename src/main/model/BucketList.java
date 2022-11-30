@@ -18,12 +18,12 @@ public class BucketList implements Writable {
 
     // MODIFIES: this
     // EFFECTS: adds activity into bucket list unless it is already there, in which case do nothing
-    //          adds event to eventlog, 
+    //          adds event to EventLog,
     public void addActivity(Activity activity) {
         if (!bucketList.contains(activity)) {
             bucketList.add(activity);
+            EventLog.getInstance().logEvent(new Event("Activity added: " + activity.getDescription()));
         }
-        EventLog.getInstance().logEvent(new Event("Activity added: " + activity.getDescription()));
     }
 
     // MODIFIES: this
