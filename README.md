@@ -58,5 +58,3 @@ Removed activity: surfing
 
 Mon Nov 28 22:37:26 PST 2022\
 Activity added: surfing
-
-# Phase 4: Task 3
