@@ -1,18 +1,14 @@
 {"activities": [
     {
-        "description": "Learn how to surf",
+        "description": "learn how to skydive",
         "completed": false
     },
     {
-        "description": "bake a 10 layer cake",
+        "description": "go wing gliding",
         "completed": false
     },
     {
-        "description": "run a marathon",
-        "completed": false
-    },
-    {
-        "description": "travel",
+        "description": "drink 8 cups of water",
         "completed": false
     }
 ]}

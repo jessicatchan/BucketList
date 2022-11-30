@@ -3,7 +3,6 @@ package ui;
 import model.Activity;
 import model.BucketList;
 import model.EventLog;
-import model.LogException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -292,11 +291,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
 
             @Override
             public void windowClosing(WindowEvent e) {
-                try {
-                    consolePrinter.printLog(EventLog.getInstance());
-                } catch (LogException ex) {
-                    System.out.println("System error, LogException caught");
-                }
+                consolePrinter.printLog(EventLog.getInstance());
                 System.exit(0);
             }
         });
