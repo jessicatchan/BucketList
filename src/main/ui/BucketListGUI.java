@@ -39,6 +39,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     private AddListener addListener;
     private JTextField activityField;
     private JScrollPane listScrollPane;
+    private static final ConsolePrinter consolePrinter = new ConsolePrinter();
 
     private static final String JSON_STORE = "./data/bucketList.json";
     private final JsonReader jsonReader = new JsonReader(JSON_STORE);
@@ -287,7 +288,6 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
         JFrame frame = new JFrame("Bucket List");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
-            final ConsolePrinter consolePrinter = new ConsolePrinter();
 
             @Override
             public void windowClosing(WindowEvent e) {
