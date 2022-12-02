@@ -284,7 +284,7 @@ public class BucketListGUI extends JPanel implements ListSelectionListener {
     }
 
     // EFFECTS: creates a GUI and shows it. Prints event log to console after the user quits the application.
-    private static void createAndShowGUI() {
+    public static void createAndShowGUI() {
         JFrame frame = new JFrame("Bucket List");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {

@@ -60,3 +60,11 @@ Mon Nov 28 22:37:26 PST 2022\
 Activity added: surfing
 
 # Phase 4: Task 3
+- Improve coupling: refactor the implementation in the createPanel method inside BucketListGUI class. Introduce a helper function to decrease code duplication.
+In this method, there are a few lines of code that add a component to the JPanel which are repeated, I would extract a method from the lines that are repeated, introducing a helper
+to decrease code duplication.
+- Improve coupling: refactor the implementation in the createButtons method inside BucketListGUI class. Extract method from duplicated code, introducing
+a helper method to decrease duplication.
+- Increase cohesion in BucketListGUI class by refactoring. Currently, the BucketListGUI is responsible for creating the GUI which includes creating the 
+bucketlist, the buttons, a panel and all the acton listener classes. It had multiple points of control, thus refactoring, so it follows the single responsiblity principle will
+increase cohesion.
