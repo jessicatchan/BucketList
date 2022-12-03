@@ -65,6 +65,3 @@ In this method, there are a few lines of code that add a component to the JPanel
 to decrease code duplication.
 - Improve coupling: refactor the implementation in the createButtons method inside BucketListGUI class. Extract method from duplicated code, introducing
 a helper method to decrease duplication.
-- Increase cohesion in BucketListGUI class by refactoring. Currently, the BucketListGUI is responsible for creating the GUI which includes creating the 
-bucketlist, the buttons, a panel and all the acton listener classes. It had multiple points of control, thus refactoring, so it follows the single responsiblity principle will
-increase cohesion.
